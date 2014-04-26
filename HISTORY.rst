@@ -5,10 +5,10 @@ Changelog
 Here's the recent changes to Better Timeit.
 
 .. changelog::
-    :version: dev
-    :released: Ongoing
+    :version: 1.0
+    :released: 2014-04-28
 
     .. change::
-        :tags: docs
+        :tags: general
 
-        Updated CHANGES.
+        First version.

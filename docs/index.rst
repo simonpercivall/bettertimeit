@@ -1,17 +1,16 @@
 Welcome to Better Timeit's documentation!
 =========================================
 
+.. include:: ../README.rst
+    :start-line: 14
+
 Contents:
 =========
-
-.. include:: ../README.rst
-    :start-line: 16
 
 .. toctree::
    :maxdepth: 2
 
    installation
-   usage
    bettertimeit
    contributing
    authors
