@@ -58,4 +58,13 @@ setup(
     ],
     test_suite='tests',
     tests_require=tests_require,
+
+    entry_points={
+        "distutils.commands": [
+            "timeit = bettertimeit.distutils_command:TimeIt",
+        ],
+        "distutils.setup_keywords": [
+            "timeit_suite = bettertimeit.distutils_command:TimeIt.validate_keyword",
+        ]
+    }
 )
