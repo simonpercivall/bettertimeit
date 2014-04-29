@@ -51,7 +51,7 @@ class TestBettertimeit(unittest.TestCase):
 
             def timeit_1():
                 for i in a:
-                    i**2
+                    print(i**2)
 
         self.timeit_func = timeit_func
 
@@ -63,11 +63,14 @@ class TestBettertimeit(unittest.TestCase):
 
     def test_basic_func(self):
         output = self._test(self.timeit_func)
+        self.assertRegexpMatches(output, r"81")
         self.assertRegexpMatches(output, r"loops")
 
     def test_module(self):
         from . import module
         output = self._test(module)
+        self.assertRegexpMatches(output, r"8")
+        self.assertRegexpMatches(output, r"16")
         self.assertRegexpMatches(output, r"loops")
         self.assertEqual(2, output.count("loops"))
 
@@ -87,10 +90,6 @@ class TestBettertimeit(unittest.TestCase):
         tree = ast.parse(inspect.getsource(module))
 
         output = self._test(tree)
-        self.assertRegexpMatches(output, r"loops")
-
-        func = [f for f in tree.body if isinstance(f, ast.FunctionDef)][0]
-        output = self._test(func)
         self.assertRegexpMatches(output, r"loops")
 
     def test_method(self):

@@ -12,7 +12,7 @@ import astunparse
 
 __author__ = 'Simon Percivall'
 __email__ = 'percivall@gmail.com'
-__version__ = '1.0'
+__version__ = '1.0.1'
 
 __all__ = ["bettertimeit"]
 
@@ -111,7 +111,7 @@ def find_timeits(tree):
             and not any(c for c in tree.body if isfunc(c)):
         timeits.append(TimeitHolder(name=tree.name[len(func_name_prefix):],
                                     setup="",
-                                    code=astunparse.unparse(tree)))
+                                    code=astunparse.unparse(tree.body)))
     else:
         # otherwise, iterate the statement body and
         # find setup code and timeit funcs
@@ -119,7 +119,7 @@ def find_timeits(tree):
             if isfunc(child) and child.name.startswith(func_name_prefix):
                 timeits.append(TimeitHolder(name=child.name[len(func_name_prefix):],
                                             setup=astunparse.unparse(setup),
-                                            code=astunparse.unparse(child)))
+                                            code=astunparse.unparse(child.body)))
             else:
                 setup.append(child)
 
