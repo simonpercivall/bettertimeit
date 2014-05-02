@@ -5,10 +5,13 @@ class TimeIt(Command):
     user_options = [
         ('timeit-suite=', 's',
          "Timeit suite to run (e.g. 'some_module.timeit_suite')"),
+        ('target-time=', 't',
+         "Timeit target time per run (default 0.2s)")
     ]
 
     def initialize_options(self):
         self.timeit_suite = None
+        self.target_time = None
 
     def finalize_options(self):
         if self.timeit_suite is None:
@@ -23,7 +26,10 @@ class TimeIt(Command):
                                 locals(),
                                 self.timeit_suite.split('.')[-1],
                                 -1)
-            bettertimeit(module)
+            extra = {}
+            if self.target_time:
+                extra['target_time'] = float(self.target_time)
+            bettertimeit(module, **extra)
 
     @staticmethod
     def validate_keyword(dist, attr, value):

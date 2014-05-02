@@ -20,9 +20,9 @@ A Better Timeit
 Example
 -------
 
-``bettertimeit`` will time any function which is named "timeit_<something>".
-The "timeit_" functions may be contained within a function or in a module.
-Each "timeit_" function will be timed separately::
+``bettertimeit`` will time any function which is named "timeit\_<something>".
+The "timeit\_" functions may be contained within a function or in a module.
+Each "timeit\_" function will be timed separately::
 
     from bettertimeit import bettertimeit
 
@@ -40,6 +40,21 @@ Each "timeit_" function will be timed separately::
     bettertimeit(container)
 
 
+To run timings from setup.py, you could add this to :func:`setup`::
+
+    setup(
+        ...
+        timeit_suite="timings",
+    )
+
+
+And then run::
+
+    % python setup.py timeit
+
+
+This would run timeit functions in ``timings.py``.
+
 Features
 --------
 
@@ -48,3 +63,5 @@ Features
 * Put your timing test code in a module or inside a function
 * Uses the same method as timeit.main to calculate the optimal number of
   passes to run.
+* Adds a ``timeit_suite`` option to setup() in setup.py, and a distutils
+  command ``timeit`` to run timings from setup.py.
